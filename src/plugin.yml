@@ -1,0 +1,15 @@
+name: Spawn
+version: 0.1
+main: net.madmanmarkau.Spawn.Spawn
+author: MadManMarkAu
+description: >
+             Set and warp to world spawn.
+commands:
+  spawn_setspawn:
+    description: Set the spawn location for this world.
+    aliases: setspawn
+    usage: /<command>
+  spawn_warpspawn:
+    description: Warp to the world spawn location.
+    aliases: spawn
+    usage: /<command>
