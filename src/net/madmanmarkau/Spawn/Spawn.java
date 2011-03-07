@@ -51,31 +51,41 @@ public class Spawn extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-		if (!(sender instanceof Player) || !Permissions.has((Player) sender, "spawn")) {
+		if (!(sender instanceof Player)) {
 			return false;
 		}
 		
 		Player player = (Player) sender;
 
-		if (cmd.getName().compareToIgnoreCase("spawn_warpspawn") == 0 && Permissions.has(player, "spawn.warp")) {
-    		Location spawn = player.getWorld().getSpawnLocation();
-    		
-			spawn.setX(spawn.getBlockX() + 0.5);
-			spawn.setY(spawn.getBlockY());
-			spawn.setZ(spawn.getBlockZ() + 0.5);
-			
-			player.teleportTo(spawn);
-			
-			return true;
-		} else if (cmd.getName().compareToIgnoreCase("spawn_setspawn") == 0 && Permissions.has(player, "spawn.set")) {
-    		Location spawn = player.getLocation();
+		if (cmd.getName().compareToIgnoreCase("spawn_warpspawn") == 0) {
+			if (Permissions.has(player, "spawn.warp")) {
+				Location spawn = player.getWorld().getSpawnLocation();
 
-			player.getWorld().setSpawnLocation(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ());
-			
-			player.sendMessage(ChatColor.RED + "Spawn location for [" + player.getWorld().getName() + "] set.");
-			log.info("Player " + player.getName() + " set spawn location for [" + player.getWorld().getName() + "]");
-			
-			return true;
+				spawn.setX(spawn.getBlockX() + 0.5);
+				spawn.setY(spawn.getBlockY());
+				spawn.setZ(spawn.getBlockZ() + 0.5);
+
+				player.teleportTo(spawn);
+
+				return true;
+			} else {
+				player.sendMessage(ChatColor.RED + "You don't have permission to do that.");
+				return true;
+			}
+		} else if (cmd.getName().compareToIgnoreCase("spawn_setspawn") == 0) {
+			if (Permissions.has(player, "spawn.set")) {
+	    		Location spawn = player.getLocation();
+	
+				player.getWorld().setSpawnLocation(spawn.getBlockX(), spawn.getBlockY(), spawn.getBlockZ());
+				
+				player.sendMessage(ChatColor.RED + "Spawn location for [" + player.getWorld().getName() + "] set.");
+				log.info("Player " + player.getName() + " set spawn location for [" + player.getWorld().getName() + "]");
+				
+				return true;
+			} else {
+				player.sendMessage(ChatColor.RED + "You don't have permission to do that.");
+				return true;
+			}
 		}
 		return false;
     }
