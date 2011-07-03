@@ -65,7 +65,7 @@ public class Spawn extends JavaPlugin {
 				spawn.setY(spawn.getBlockY());
 				spawn.setZ(spawn.getBlockZ() + 0.5);
 
-				player.teleportTo(spawn);
+				player.teleport(spawn);
 
 				return true;
 			} else {
